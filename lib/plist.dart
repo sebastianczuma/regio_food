@@ -1,39 +1,27 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
 import 'dart:async';
 import 'dart:convert';
 
-TextStyle titleStyle = new TextStyle(
-    color: Colors.black,
-    fontFamily: 'WorkSans',
-    fontWeight: FontWeight.bold,
-    fontSize: 22.0);
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-Future<Post> fetchPost() async {
+import 'Item.dart';
+import 'Strings.dart';
+import 'Styles.dart';
+import 'Urls.dart';
+
+Future<List<Item>> fetchItems(http.Client client, String province) async {
   final response =
-  await http.get('https://produkty-regionalne.firebaseio.com/wojewodztwa/dolnoslaskie.json');
+      await client.get(BASE_URL + province + '/produkty_mleczne.json');
 
-  if (response.statusCode == 200) {
-    // If the call to the server was successful, parse the JSON
-    print(response.body);
-    return Post.fromJson(json.decode(response.body));
-  } else {
-    // If that call was not successful, throw an error.
-    throw Exception('Failed to load post');
-  }
+  // Use the compute function to run parsePhotos in a separate isolate
+  return compute(parseItems, response.body);
 }
 
-class Post {
-  final String name;
+List<Item> parseItems(String responseBody) {
+  final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
 
-  Post({this.name});
-
-  factory Post.fromJson(Map<String, dynamic> json) {
-    return Post(
-      name: json['name'],
-    );
-  }
+  return parsed.map<Item>((json) => Item.fromJson(json)).toList();
 }
 
 class PList extends StatelessWidget {
@@ -47,23 +35,62 @@ class PList extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(province,
-          style: titleStyle),
+        title: Text(province, style: titleStyle),
       ),
-      body: Center(
-        child: FutureBuilder<Post>(
-          future: fetchPost(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Text(snapshot.data.name);
-            } else if (snapshot.hasError) {
-              return Text("${snapshot.error}");
-            }
+      body: FutureBuilder<List<Item>>(
+        future: fetchItems(http.Client(), removePolishChars(province)),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) print(snapshot.error);
 
-            // By default, show a loading spinner
-            return CircularProgressIndicator();
-          },
-        ),
+          return snapshot.hasData
+              ? PhotosList(items: snapshot.data)
+              : Center(child: CircularProgressIndicator());
+        },
+      ),
+    );
+  }
+}
+
+class PhotosList extends StatelessWidget {
+  final List<Item> items;
+  final TextStyle _biggerFont = const TextStyle(fontSize: 16.0);
+
+  PhotosList({Key key, this.items}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        padding: const EdgeInsets.all(16.0),
+        itemCount: items.length * 2,
+        itemBuilder: (BuildContext _context, int i) {
+          if (i == 0) {
+            return _buildRowTitle("produkty mleczne");
+          }
+          if (i.isEven) {
+            return new Divider();
+          }
+
+          if (i == 0) {}
+          final int index = i ~/ 2;
+
+          return _buildRow(items[index]);
+        });
+  }
+
+  Widget _buildRow(Item item) {
+    return new ListTile(
+      title: new Text(
+        item.name,
+        style: _biggerFont,
+      ),
+    );
+  }
+
+  Widget _buildRowTitle(String pair) {
+    return new ListTile(
+      title: new Text(
+        pair,
+        style: new TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }
