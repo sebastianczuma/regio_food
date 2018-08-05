@@ -1,11 +1,14 @@
+
 class Item {
   final String name;
+  final String url;
 
-  Item({this.name});
+  Item(this.name, this.url);
+}
 
-  factory Item.fromJson(Map<String, dynamic> json) {
-    return Item(
-      name: json['name'] as String,
-    );
-  }
+class myCategory {
+  List<Item> products;
+
+  myCategory(this.products);
+
 }

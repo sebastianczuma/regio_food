@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 
-final TextStyle rowStyle = new TextStyle(
+final TextStyle rowStyle = const TextStyle(
     fontFamily: 'WorkSans',
     color: Color(0xFFD16A68),
     fontWeight: FontWeight.bold,
     fontSize: 16.0);
 
-final TextStyle titleStyle = new TextStyle(
+final TextStyle titleStyle = const TextStyle(
     color: Colors.black,
     fontFamily: 'WorkSans',
     fontWeight: FontWeight.bold,
     fontSize: 22.0);
 
-final TextStyle subtitleStyle = new TextStyle(
+final TextStyle subtitleStyle = const TextStyle(
     color: Colors.black,
     fontFamily: 'WorkSans',
     fontWeight: FontWeight.normal,
     fontSize: 18.0);
+
+final TextStyle listFont = const TextStyle(fontSize: 16.0);

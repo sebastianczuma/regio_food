@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
     double aspectRatio;
     double paddingBottom;
     if (MediaQuery.of(context).orientation == Orientation.portrait) {
-      aspectRatio = 3.5;
+      aspectRatio = 3.3;
       paddingBottom = 40.0;
     } else {
       aspectRatio = 5.5;

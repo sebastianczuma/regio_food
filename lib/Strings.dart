@@ -20,6 +20,33 @@ List<String> provinceList = [
   'zachodniopomorskie'
 ];
 
+List<String> categoryList = [
+  'Produkty mleczne',
+  'Produkty mięsne',
+  'Produkty rybołówstwa',
+  'Warzywa i owoce',
+  'Wyroby piekarnicze i cukiernicze',
+  'Oleje i tłuszcze',
+  'Miody',
+  'Gotowe dania i potrawy',
+  'Napoje',
+  'Inne produkty',
+];
+
+List<String> categoryListForDownload = [
+  'produkty_mleczne',
+  'produkty_miesne',
+  'produkty_rybolowstwa',
+  'warzywa_i_owoce',
+  'wyroby_piekarnicze_i_cukiernicze',
+  'oleje_i_tluszcze',
+  'miody',
+  'gotowe_dania_i_potrawy',
+  'napoje',
+  'inne_produkty',
+];
+
+
 String removePolishChars(String fromWhat) {
   String toWhat = fromWhat
       .replaceAll('ą', 'a')

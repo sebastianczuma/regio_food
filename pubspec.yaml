@@ -28,9 +28,12 @@ flutter:
   fonts:
       - family: WorkSans
         fonts:
-          - asset: assets/worksans_regular.ttf
-          - asset: assets/worksans_bold.ttf
+          - asset: assets/fonts/worksans_regular.ttf
+          - asset: assets/fonts/worksans_bold.ttf
             weight: 700
+
+  assets:
+    - assets/images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
