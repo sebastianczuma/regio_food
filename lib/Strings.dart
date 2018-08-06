@@ -1,6 +1,7 @@
 final String mainTitle = 'Produkty regionalne';
 final String mainDescription =
     'Wybierz województwo aby wyświetlić produkty regionalne dla tego obszaru.';
+
 List<String> provinceList = [
   'dolnośląskie',
   'kujawsko-pomorskie',
@@ -33,6 +34,19 @@ List<String> categoryList = [
   'Inne produkty',
 ];
 
+List<String> categoryListSmall = [
+  'produkty mleczne',
+  'produkty mięsne',
+  'produkty rybołówstwa',
+  'warzywa i owoce',
+  'wyroby piekarnicze i cukiernicze',
+  'oleje i tłuszcze',
+  'miody',
+  'gotowe dania i potrawy',
+  'napoje',
+  'inne produkty',
+];
+
 List<String> categoryListForDownload = [
   'produkty_mleczne',
   'produkty_miesne',
@@ -46,6 +60,29 @@ List<String> categoryListForDownload = [
   'inne_produkty',
 ];
 
+List<String> detailTags = [
+  'name',
+  'look',
+  'shape',
+  'size',
+  'color',
+  'consistency',
+  'taste',
+  'other',
+  'tradition'
+];
+
+List<String> detailTitles = [
+  'Nazwa',
+  'Wygląd',
+  'Kształt',
+  'Rozmiar',
+  'Kolor',
+  'Konsystencja',
+  'Smak',
+  'Inne informacje',
+  'Tradycja'
+];
 
 String removePolishChars(String fromWhat) {
   String toWhat = fromWhat

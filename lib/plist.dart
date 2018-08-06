@@ -9,91 +9,29 @@ import 'Item.dart';
 import 'Strings.dart';
 import 'Styles.dart';
 import 'Urls.dart';
+import 'pdetails.dart';
 
-String whatsNow;
-
-Future<myCategory> fetchItems(http.Client client, String province) async {
+Future<ItemList> fetchItems(http.Client client, String province) async {
   final response = await client.get(BASE_URL + province + '.json');
 
   return compute(parseItems, response.body);
 }
 
-myCategory parseItems(String responseBody) {
+ItemList parseItems(String responseBody) {
   final parsed = json.decode(responseBody);
 
   List<Item> items = new List<Item>();
 
-  if (parsed['produkty_mleczne'] != null) {
-    items.add(new Item('produkty mleczne', ''));
-    for (var name in parsed['produkty_mleczne']) {
-      items.add(new Item(name['name'], name['url']));
+  for (int i = 0; i < categoryListForDownload.length; i++) {
+    if (parsed[categoryListForDownload[i]] != null) {
+      items.add(new Item(categoryListSmall[i], '', ''));
+      for (var item in parsed[categoryListForDownload[i]]) {
+        items.add(new Item(item['name'], item['url'], item['category']));
+      }
     }
   }
 
-  if (parsed['produkty_miesne'] != null) {
-    items.add(new Item('produkty mięsne', ''));
-    for (var name in parsed['produkty_miesne']) {
-      items.add(new Item(name['name'], name['url']));
-    }
-  }
-
-  if (parsed['produkty_rybolowstwa'] != null) {
-    items.add(new Item('produkty rybołówstwa', ''));
-    for (var name in parsed['produkty_rybolowstwa']) {
-      items.add(new Item(name['name'], name['url']));
-    }
-  }
-
-  if (parsed['warzywa_i_owoce'] != null) {
-    items.add(new Item('warzywa i owoce', ''));
-    for (var name in parsed['warzywa_i_owoce']) {
-      items.add(new Item(name['name'], name['url']));
-    }
-  }
-
-  if (parsed['wyroby_piekarnicze_i_cukiernicze'] != null) {
-    items.add(new Item('wyroby piekarnicze i cukiernicze', ''));
-    for (var name in parsed['wyroby_piekarnicze_i_cukiernicze']) {
-      items.add(new Item(name['name'], name['url']));
-    }
-  }
-
-  if (parsed['oleje_i_tluszcze'] != null) {
-    items.add(new Item('oleje i tłuszcze', ''));
-    for (var name in parsed['oleje_i_tluszcze']) {
-      items.add(new Item(name['name'], name['url']));
-    }
-  }
-
-  if (parsed['miody'] != null) {
-    items.add(new Item('miody', ''));
-    for (var name in parsed['miody']) {
-      items.add(new Item(name['name'], name['url']));
-    }
-  }
-
-  if (parsed['gotowe_dania_i_potrawy'] != null) {
-    items.add(new Item('gotowe dania i potrawy', ''));
-    for (var name in parsed['gotowe_dania_i_potrawy']) {
-      items.add(new Item(name['name'], name['url']));
-    }
-  }
-
-  if (parsed['napoje'] != null) {
-    items.add(new Item('napoje', ''));
-    for (var name in parsed['napoje']) {
-      items.add(new Item(name['name'], name['url']));
-    }
-  }
-
-  if (parsed['inne_produkty'] != null) {
-    items.add(new Item('inne produkty', ''));
-    for (var name in parsed['inne_produkty']) {
-      items.add(new Item(name['name'], name['url']));
-    }
-  }
-
-  return new myCategory(items);
+  return new ItemList(items);
 }
 
 class PList extends StatelessWidget {
@@ -109,7 +47,7 @@ class PList extends StatelessWidget {
         backgroundColor: Colors.white,
         title: Text(province, style: titleStyle),
       ),
-      body: FutureBuilder<myCategory>(
+      body: FutureBuilder<ItemList>(
         future: fetchItems(http.Client(), removePolishChars(province)),
         builder: (context, snapshot) {
           if (snapshot.hasError) print(snapshot.error);
@@ -124,7 +62,7 @@ class PList extends StatelessWidget {
 }
 
 class ItemsList extends StatelessWidget {
-  final myCategory items;
+  final ItemList items;
 
   ItemsList({Key key, this.items}) : super(key: key);
 
@@ -140,30 +78,28 @@ class ItemsList extends StatelessWidget {
             return new Divider();
           }
 
-          if (items.products[index].name == 'produkty mleczne' ||
-              items.products[index].name == 'produkty mięsne' ||
-              items.products[index].name == 'produkty rybołówstwa' ||
-              items.products[index].name == 'warzywa i owoce' ||
-              items.products[index].name ==
-                  'wyroby piekarnicze i cukiernicze' ||
-              items.products[index].name == 'oleje i tłuszcze' ||
-              items.products[index].name == 'miody' ||
-              items.products[index].name == 'gotowe dania i potrawy' ||
-              items.products[index].name == 'napoje' ||
-              items.products[index].name == 'inne produkty') {
-            whatsNow = removePolishChars(items.products[index].name)
-                .replaceAll(' ', '_');
-            return _buildRowTitle(items.products[index].name);
+          for (var name in categoryListSmall) {
+            if (items.products[index].name == name) {
+              return _buildRowTitle(items.products[index].name);
+            }
           }
 
-          return _buildRow(items.products[index], whatsNow);
+          return _buildRow(items.products[index], context);
         });
   }
 
-  Widget _buildRow(Item item, String whatsNow) {
+  Widget _buildRow(Item item, BuildContext context) {
     return new ListTile(
+      onTap: () {
+        // Add 9 lines from here...
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => PDetails(url: item.url, name: item.name)),
+        );
+      },
       leading: Image.asset(
-        'assets/images/' + whatsNow + '.png',
+        'assets/images/' + item.category + '.png',
         width: 40.0,
         height: 40.0,
       ),

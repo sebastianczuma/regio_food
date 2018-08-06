@@ -1,14 +1,13 @@
-
 class Item {
   final String name;
   final String url;
+  final String category;
 
-  Item(this.name, this.url);
+  Item(this.name, this.url, this.category);
 }
 
-class myCategory {
+class ItemList {
   List<Item> products;
 
-  myCategory(this.products);
-
+  ItemList(this.products);
 }
