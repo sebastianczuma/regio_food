@@ -73,7 +73,7 @@ class DetailList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        padding: const EdgeInsets.only(top: 16.0),
+        padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
         itemCount: details.length - 1,
         itemBuilder: (BuildContext _context, int i) {
           if (i == 0) {

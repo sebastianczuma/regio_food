@@ -10,12 +10,12 @@ final TextStyle titleStyle = const TextStyle(
     color: Colors.black,
     fontFamily: 'WorkSans',
     fontWeight: FontWeight.bold,
-    fontSize: 22.0);
+    fontSize: 20.0);
 
 final TextStyle subtitleStyle = const TextStyle(
     color: Colors.black,
     fontFamily: 'WorkSans',
     fontWeight: FontWeight.normal,
-    fontSize: 18.0);
+    fontSize: 17.0);
 
 final TextStyle listFont = const TextStyle(fontSize: 16.0);
