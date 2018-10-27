@@ -20,7 +20,7 @@ class PList extends StatelessWidget {
         backgroundColor: Colors.white,
         title: Text(province, style: titleStyle),
       ),
-      body: FutureBuilder<ItemList>(
+      body: FutureBuilder<List<Item>>(
         future: fetchItems(http.Client(), removePolishChars(province)),
         builder: (context, snapshot) {
           if (snapshot.hasError) print(snapshot.error);
@@ -35,7 +35,7 @@ class PList extends StatelessWidget {
 }
 
 class ItemsList extends StatelessWidget {
-  final ItemList items;
+  final List<Item> items;
 
   ItemsList({Key key, this.items}) : super(key: key);
 
@@ -43,26 +43,26 @@ class ItemsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
-        itemCount: items.products.length * 2,
+        itemCount: items.length * 2,
         itemBuilder: (BuildContext _context, int i) {
           final int index = i ~/ 2;
 
           if (i.isOdd) {
-            return new Divider();
+            return Divider();
           }
 
           for (var name in categoryListSmall) {
-            if (items.products[index].name == name) {
-              return _buildRowTitle(items.products[index].name);
+            if (items[index].name == name) {
+              return _buildRowTitle(items[index].name);
             }
           }
 
-          return _buildRow(items.products[index], context);
+          return _buildRow(items[index], context);
         });
   }
 
   Widget _buildRow(Item item, BuildContext context) {
-    return new ListTile(
+    return ListTile(
       onTap: () {
         // Add 9 lines from here...
         Navigator.push(
@@ -76,7 +76,7 @@ class ItemsList extends StatelessWidget {
         width: 40.0,
         height: 40.0,
       ),
-      title: new Text(
+      title: Text(
         item.name,
         style: listFont,
       ),
@@ -84,10 +84,10 @@ class ItemsList extends StatelessWidget {
   }
 
   Widget _buildRowTitle(String pair) {
-    return new ListTile(
-      title: new Text(
+    return ListTile(
+      title: Text(
         pair,
-        style: new TextStyle(fontWeight: FontWeight.bold),
+        style: TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }

@@ -60,18 +60,6 @@ List<String> categoryListForDownload = [
   'inne_produkty',
 ];
 
-List<String> detailTags = [
-  'name',
-  'look',
-  'shape',
-  'size',
-  'color',
-  'consistency',
-  'taste',
-  'other',
-  'tradition'
-];
-
 List<String> detailTitles = [
   'Nazwa',
   'Wygląd',
@@ -96,6 +84,5 @@ String removePolishChars(String fromWhat) {
       .replaceAll('ż', 'z')
       .replaceAll('ź', 'z');
 
-  print(toWhat);
   return toWhat;
 }

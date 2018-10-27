@@ -5,9 +5,3 @@ class Item {
 
   Item(this.name, this.url, this.category);
 }
-
-class ItemList {
-  List<Item> products;
-
-  ItemList(this.products);
-}

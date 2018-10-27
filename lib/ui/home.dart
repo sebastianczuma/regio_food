@@ -25,9 +25,9 @@ class Home extends StatelessWidget {
     );
 
     AlignmentGeometry align;
-    Widget provinceSection = new Expanded(
-        child: new GridView.builder(
-      gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+    Widget provinceSection = Expanded(
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: aspectRatio,
       ),
@@ -38,9 +38,9 @@ class Home extends StatelessWidget {
         } else {
           align = FractionalOffset.centerRight;
         }
-        return new Align(
+        return Align(
           alignment: align,
-          child: new FlatButton(
+          child: FlatButton(
             padding: const EdgeInsets.all(8.0),
             onPressed: () {
               Navigator.push(
@@ -49,7 +49,7 @@ class Home extends StatelessWidget {
                     builder: (context) => PList(province: provinceList[index])),
               );
             },
-            child: new Text(
+            child: Text(
               provinceList[index],
               style: rowStyle,
             ),
@@ -58,7 +58,7 @@ class Home extends StatelessWidget {
       },
     ));
 
-    return new Scaffold(
+    return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,

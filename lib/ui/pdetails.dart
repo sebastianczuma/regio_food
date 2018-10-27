@@ -56,13 +56,13 @@ class DetailList extends StatelessWidget {
   }
 
   Widget _buildTile(String title, String image) {
-    return new ListTile(
+    return ListTile(
       leading: Image.asset(
         'assets/images/' + image + '.png',
         width: 40.0,
         height: 40.0,
       ),
-      title: new Text(
+      title: Text(
         title,
         style: listFont,
       ),
@@ -70,8 +70,8 @@ class DetailList extends StatelessWidget {
   }
 
   Widget _buildRowTitle(String pair) {
-    return new ListTile(
-      title: new Text(
+    return ListTile(
+      title: Text(
         pair,
         style: rowStyle,
       ),
@@ -79,8 +79,8 @@ class DetailList extends StatelessWidget {
   }
 
   Widget _buildRow(String pair) {
-    return new ListTile(
-      title: new Text(
+    return ListTile(
+      title: Text(
         pair,
       ),
     );
