@@ -31,7 +31,7 @@ List<String> decodeJsonForDetail(String responseBody) {
 
   for (int i = 0; i < detailTitles.length; i++) {
     if (i != 0) {
-      parsedDetails.add(detailTitles[i]);
+      details.add(detailTitles[i]);
     }
     if (parsedDetails[i] != null && parsedDetails[i].isNotEmpty) {
       details.add(parsedDetails[i]);

@@ -82,6 +82,7 @@ class DetailList extends StatelessWidget {
     return ListTile(
       title: Text(
         pair,
+        style: listFont,
       ),
     );
   }

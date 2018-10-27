@@ -64,7 +64,6 @@ class ItemsList extends StatelessWidget {
   Widget _buildRow(Item item, BuildContext context) {
     return ListTile(
       onTap: () {
-        // Add 9 lines from here...
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -87,7 +86,7 @@ class ItemsList extends StatelessWidget {
     return ListTile(
       title: Text(
         pair,
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: listFontCategory,
       ),
     );
   }
