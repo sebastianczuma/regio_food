@@ -5,7 +5,7 @@ width="200" hspace="10" vspace="10">
 
 Regio Food is a simple app presenting list of Polish regional foods and details about them.
 
-Data comes from Firebase server. In the source code there is also very simple example of handling JSON list.
+Data comes from the Firebase server. In the source code there is also simple example of handling JSON list.
 
 <br />
 
