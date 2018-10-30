@@ -20,7 +20,7 @@ Regio Food is available on the Google Play Store for Polish customers.
 
 ## About
 
-The application downloads and shows Polish regional and traditional foods from Firebase server. Database is build with Python Scripts in prepare_db_regio_food repository. Regio Food is an example of app build with Flutter SDK.
+The application downloads and shows Polish regional and traditional foods from Firebase server. Database is build with Python Scripts located in prepare_db_regio_food repository. Regio Food is an example of app build with Flutter SDK.
 
 It's free of cost and free of ads.
 
@@ -34,9 +34,7 @@ The android app lets you:
 
 ## Screenshots
 
-[<img src="/readme/grafika_top.png" align="center"
-width="700"
-hspace="10" vspace="10">](/readme/grafika_top.png)
+<img src="/readme/grafika_top.png" align="center">
 
 &nbsp;
 
@@ -47,7 +45,7 @@ Regio Food requires the following permissions:
 
 ## Getting Started
 
-For help getting started with Flutter, view our online
+For help getting started with Flutter, view online
 [documentation](https://flutter.io/).
 
 ## Generate project files
