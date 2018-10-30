@@ -1,4 +1,4 @@
-# Regio Food
+# Regio Food - Android App
 
 <img src="/readme/icon.png" align="left"
 width="200" hspace="10" vspace="10">
